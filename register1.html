@@ -18,6 +18,7 @@ body {
  background-size: cover;
 
 }
+
 </style>
 <style>
     .link { color: #FFFFFF; } /* CSS link color */
@@ -25,7 +26,49 @@ body {
     background-color:aqua;
 }
 </style>
+<script>
+function frm(){
 
+var tbClients = localStorage.getItem("tbClients1");//Retrieve the stored data
+
+tbClients = JSON.parse(tbClients); //Converts string to object
+
+if(tbClients == null) //If there is no data, initialize an empty array
+
+ tbClients = [];
+
+
+
+var name=document.getElementById("firstName").value;
+
+
+
+var add=document.getElementById("street").value;
+
+
+
+var cty=document.getElementById("city").value;
+
+
+
+var phone=document.getElementById("phone").value;
+
+
+
+var costomer=JSON.stringify({'firstName':name,'street':add,'city':cty,'phone':phone});
+
+tbClients.push(costomer);
+
+localStorage.setItem("tbClients1", JSON.stringify(tbClients));
+
+
+
+return true;
+
+
+
+}
+</script>
   
 <head>
   <title>UI HACKATHON</title>
@@ -68,14 +111,14 @@ body {
 </nav>
 <body>
 
-    <form class="container" >
-	<form action="view-appointment.html" onsubmit="return frm();">
+
+        <form action="view-appointment.html" method="post"  onsubmit="return frm();">
         <div class="container">
 	<h1 align="center">Registration form</h1>
             <div class="form-row">
                 <div class="col-md-4 mb-3">
                     <label for="validationDefault1">FirstName</label>
-                    <input type="text" class="form-control" id="firstname" placeholder="FirstName" required
+                    <input type="text" class="form-control" id="firstName" placeholder="FirstName" required
                         pattern="[a-zA-Z0-9]+">
                 </div>
                 <div class="col-md-4 mb-3">
@@ -106,7 +149,7 @@ body {
                 <div class="form-row">
                     <div class="col-md-12 mb-3">
                         <label for="validationDefault01">Street Address</label>
-                        <input type="text" class="form-control" id="address" placeholder="Street" required>
+                        <input type="text" class="form-control" id="street" placeholder="Street" required>
                     </div>
                 </div>
                 <div class="form-row">
@@ -398,9 +441,9 @@ body {
      </div>
 
    </div>
-<input type="submit" value="Submit form" onclick="fitnessTracker()" class="bg-primary">
+<button type="submit" class="bg-primary">Submit</button>
               
-              </form>
+            
               
         </div>
         
